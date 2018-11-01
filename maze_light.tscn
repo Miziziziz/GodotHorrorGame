@@ -15,7 +15,7 @@ shader = ExtResource( 2 )
 shader_param/color = Color( 1, 1, 1, 1 )
 _sections_unfolded = [ "shader_param" ]
 
-[node name="Light" type="RayCast" index="0"]
+[node name="Light" type="RayCast"]
 
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.001 )
 enabled = true

@@ -27,7 +27,7 @@ _sections_unfolded = [ "shader_param" ]
 
 background_mode = 1
 background_sky_custom_fov = 0.0
-background_color = Color( 1, 1, 1, 1 )
+background_color = Color( 0, 0, 0, 1 )
 background_energy = 1.0
 background_canvas_max_layer = 0
 ambient_light_color = Color( 0, 0, 0, 1 )
@@ -102,7 +102,7 @@ adjustment_contrast = 1.0
 adjustment_saturation = 1.0
 _sections_unfolded = [ "Background" ]
 
-[node name="Player" type="KinematicBody"]
+[node name="Player" type="KinematicBody" index="0"]
 
 input_ray_pickable = true
 input_capture_on_drag = false
