@@ -1,0 +1,628 @@
+[gd_scene load_steps=14 format=2]
+
+[ext_resource path="res://maze_blocks.tres" type="MeshLibrary" id=1]
+[ext_resource path="res://gridmap.gd" type="Script" id=2]
+[ext_resource path="res://player.tscn" type="PackedScene" id=3]
+[ext_resource path="res://button_manager.gd" type="Script" id=4]
+[ext_resource path="res://15813__tedthetrumpet__alarmclockbeeps.wav" type="AudioStream" id=5]
+[ext_resource path="res://button.tscn" type="PackedScene" id=6]
+[ext_resource path="res://maze_block.tscn" type="PackedScene" id=7]
+[ext_resource path="res://maze_block.shader" type="Shader" id=8]
+[ext_resource path="res://enemy.tscn" type="PackedScene" id=9]
+[ext_resource path="res://end_zonee.gd" type="Script" id=10]
+
+[sub_resource type="QuadMesh" id=2]
+
+custom_aabb = AABB( 0, 0, 0, 0, 0, 0 )
+size = Vector2( 1, 1 )
+
+[sub_resource type="ShaderMaterial" id=3]
+
+render_priority = 0
+shader = ExtResource( 8 )
+shader_param/color = Color( 1, 1, 1, 1 )
+_sections_unfolded = [ "shader_param" ]
+
+[sub_resource type="BoxShape" id=1]
+
+extents = Vector3( 1, 1, 1 )
+
+[node name="World" type="Spatial"]
+
+[node name="GridMap" type="GridMap" parent="." index="0"]
+
+theme = ExtResource( 1 )
+cell_size = Vector3( 2, 2, 2 )
+cell_octant_size = 8
+cell_center_x = true
+cell_center_y = true
+cell_center_z = true
+cell_scale = 1.0
+collision_layer = 1
+collision_mask = 1
+data = {
+"cells": PoolIntArray( 1, 0, 0, 3, 0, 0, 11, 0, 0, 13, 0, 0, 14, 0, 0, 16, 0, 0, 65525, 0, 0, 65527, 0, 0, 65529, 0, 0, 65531, 0, 0, 65532, 0, 1610612736, 65533, 0, 0, 65535, 0, 0, 1, 1, 0, 3, 1, 0, 11, 1, 0, 13, 1, 1610612736, 14, 1, -536870912, 16, 1, 1610612736, 65525, 1, -536870912, 65527, 1, 0, 65529, 1, 0, 65531, 1, 1073741824, 65532, 1, 1073741824, 65533, 1, 1610612736, 65535, 1, -536870912, 1, 2, 0, 3, 2, 0, 11, 2, -1610612736, 16, 2, -2147483648, 65525, 2, 536870912, 65527, 2, 1073741824, 65529, 2, 536870912, 65535, 2, -536870912, 1, 3, 1073741824, 3, 3, 1610612736, 11, 3, 1610612736, 12, 3, -1073741824, 13, 3, 536870912, 14, 3, 1073741824, 15, 3, 1610612736, 16, 3, 1610612736, 65525, 3, 1610612736, 65527, 3, -1073741824, 65529, 3, 1073741824, 65530, 3, 536870912, 65531, 3, 1073741824, 65532, 3, -2147483648, 65533, 3, -536870912, 65534, 3, -1610612736, 65535, 3, -1610612736, 1, 4, 1610612736, 3, 4, 1073741824, 65525, 4, 1073741824, 65527, 4, -2147483648, 0, 5, -2147483648, 1, 5, -2147483648, 3, 5, 0, 65525, 5, -2147483648, 65527, 5, -536870912, 65528, 5, -536870912, 65529, 5, 0, 65530, 5, 1610612736, 65531, 5, -1073741824, 65533, 5, -536870912, 65534, 5, 536870912, 65535, 5, -1073741824, 3, 6, 1073741824, 65525, 6, 1073741824, 0, 7, 1610612736, 1, 7, -536870912, 2, 7, 1073741824, 3, 7, 0, 65525, 7, -1073741824, 65526, 7, -1610612736, 65527, 7, 536870912, 65528, 7, 1073741824, 65529, 7, -1610612736, 65530, 7, 1610612736, 65531, 7, -536870912, 65532, 7, 1610612736, 65533, 7, -2147483648, 65534, 7, -1073741824, 65535, 7, -536870912, 65527, 65506, -1610612736, 65528, 65506, -1610612736, 65529, 65506, 0, 65530, 65506, 0, 65531, 65506, 536870912, 65532, 65506, 1073741824, 65533, 65506, 1073741824, 65527, 65507, 536870912, 65533, 65507, 0, 0, 65508, -2147483648, 1, 65508, 0, 65527, 65508, 1610612736, 65529, 65508, -536870912, 65530, 65508, 0, 65531, 65508, 1073741824, 65533, 65508, -536870912, 65534, 65508, -1073741824, 65535, 65508, 536870912, 1, 65509, -1073741824, 65527, 65509, 536870912, 65529, 65509, 1610612736, 65530, 65509, -536870912, 65531, 65509, -536870912, 1, 65510, -2147483648, 65527, 65510, -2147483648, 65529, 65510, -1610612736, 65530, 65510, -1610612736, 65531, 65510, -2147483648, 65533, 65510, 0, 65534, 65510, -1073741824, 65535, 65510, -1610612736, 1, 65511, -1073741824, 65527, 65511, -1610612736, 65529, 65511, -2147483648, 65530, 65511, 1610612736, 65531, 65511, 0, 65533, 65511, -1610612736, 65534, 65511, -2147483648, 65535, 65511, 536870912, 1, 65512, 0, 65527, 65512, 1073741824, 65533, 65512, 0, 65534, 65512, 536870912, 65535, 65512, -2147483648, 1, 65513, 1610612736, 2, 65513, -1610612736, 3, 65513, 1610612736, 4, 65513, 536870912, 5, 65513, 1073741824, 6, 65513, -1073741824, 7, 65513, 536870912, 8, 65513, 1610612736, 9, 65513, 1610612736, 10, 65513, -2147483648, 11, 65513, -2147483648, 12, 65513, 1073741824, 13, 65513, -2147483648, 14, 65513, -536870912, 15, 65513, 1073741824, 16, 65513, -2147483648, 17, 65513, 0, 18, 65513, 0, 19, 65513, 0, 20, 65513, 1073741824, 21, 65513, -2147483648, 22, 65513, -1073741824, 23, 65513, -1073741824, 24, 65513, -536870912, 25, 65513, 1073741824, 26, 65513, -1073741824, 27, 65513, 536870912, 28, 65513, 1610612736, 65527, 65513, 1610612736, 65529, 65513, 0, 65530, 65513, 1610612736, 65531, 65513, 536870912, 65533, 65513, 0, 65534, 65513, 1610612736, 65535, 65513, 1073741824, 28, 65514, 0, 65527, 65514, 0, 65529, 65514, 536870912, 65530, 65514, 1073741824, 65531, 65514, 0, 1, 65515, -2147483648, 2, 65515, 536870912, 3, 65515, -536870912, 4, 65515, 0, 5, 65515, -1610612736, 6, 65515, 536870912, 7, 65515, -536870912, 8, 65515, -536870912, 9, 65515, -1610612736, 10, 65515, -536870912, 11, 65515, -2147483648, 12, 65515, 1073741824, 14, 65515, 1610612736, 15, 65515, -1073741824, 16, 65515, 1073741824, 17, 65515, 0, 18, 65515, -1610612736, 19, 65515, -2147483648, 20, 65515, 536870912, 21, 65515, 1610612736, 22, 65515, 536870912, 23, 65515, 536870912, 24, 65515, 536870912, 25, 65515, -1073741824, 26, 65515, -1610612736, 27, 65515, 0, 28, 65515, -2147483648, 65527, 65515, -2147483648, 65529, 65515, -1610612736, 65530, 65515, -1073741824, 65531, 65515, 1610612736, 65533, 65515, 1610612736, 65534, 65515, -1073741824, 65535, 65515, 1073741824, 1, 65516, -536870912, 12, 65516, 0, 14, 65516, 1073741824, 65527, 65516, -2147483648, 65529, 65516, -1073741824, 65530, 65516, 1610612736, 65531, 65516, -2147483648, 65533, 65516, -2147483648, 65534, 65516, -536870912, 65535, 65516, -536870912, 1, 65517, 1610612736, 12, 65517, 0, 14, 65517, -536870912, 65527, 65517, 1610612736, 65533, 65517, -2147483648, 65534, 65517, 0, 65535, 65517, -536870912, 1, 65518, -2147483648, 12, 65518, 0, 14, 65518, 1610612736, 65527, 65518, -1073741824, 65529, 65518, 1610612736, 65530, 65518, -2147483648, 65531, 65518, 1073741824, 65533, 65518, -1610612736, 65534, 65518, 1610612736, 65535, 65518, -1610612736, 1, 65519, 1073741824, 12, 65519, -536870912, 14, 65519, -536870912, 65527, 65519, -2147483648, 65529, 65519, 1073741824, 65530, 65519, 536870912, 65531, 65519, -1073741824, 0, 65520, 0, 1, 65520, 536870912, 12, 65520, 0, 14, 65520, -536870912, 65527, 65520, -536870912, 65529, 65520, -2147483648, 65530, 65520, 0, 65531, 65520, 1073741824, 65533, 65520, -1610612736, 65534, 65520, -536870912, 65535, 65520, 536870912, 12, 65521, -536870912, 14, 65521, -536870912, 65527, 65521, -1610612736, 65529, 65521, 536870912, 65530, 65521, -1610612736, 65531, 65521, -536870912, 65533, 65521, -2147483648, 12, 65522, 536870912, 14, 65522, -536870912, 65527, 65522, 1610612736, 65533, 65522, 1073741824, 12, 65523, 536870912, 14, 65523, -536870912, 65527, 65523, 536870912, 65528, 65523, -1073741824, 65529, 65523, -536870912, 65530, 65523, 536870912, 65531, 65523, 0, 65533, 65523, -1073741824, 12, 65524, -2147483648, 14, 65524, -536870912, 65531, 65524, 536870912, 65533, 65524, 1073741824, 0, 65525, 1610612736, 1, 65525, 1073741824, 2, 65525, -1073741824, 3, 65525, -1610612736, 4, 65525, 1610612736, 5, 65525, -536870912, 6, 65525, -1610612736, 7, 65525, -1073741824, 8, 65525, 1610612736, 9, 65525, -1073741824, 10, 65525, -536870912, 12, 65525, 1610612736, 14, 65525, 1610612736, 15, 65525, -536870912, 16, 65525, -1073741824, 17, 65525, -536870912, 18, 65525, 1610612736, 19, 65525, -2147483648, 20, 65525, -1073741824, 21, 65525, 0, 65531, 65525, -536870912, 65533, 65525, -2147483648, 65534, 65525, 0, 65535, 65525, 0, 10, 65526, -1073741824, 11, 65526, 536870912, 12, 65526, 1073741824, 14, 65526, -2147483648, 21, 65526, -2147483648, 65531, 65526, -1073741824, 0, 65527, 1610612736, 1, 65527, 1073741824, 2, 65527, 1610612736, 3, 65527, -1073741824, 4, 65527, 0, 5, 65527, 0, 6, 65527, 0, 7, 65527, 536870912, 8, 65527, 1073741824, 16, 65527, -1073741824, 17, 65527, -1610612736, 18, 65527, -2147483648, 19, 65527, -1610612736, 21, 65527, -1073741824, 65531, 65527, -2147483648, 65533, 65527, -1610612736, 65534, 65527, 0, 65535, 65527, -2147483648, 8, 65528, -1073741824, 10, 65528, -1073741824, 11, 65528, -1073741824, 12, 65528, -536870912, 13, 65528, 1610612736, 14, 65528, -536870912, 16, 65528, -1610612736, 17, 65528, -1073741824, 18, 65528, 536870912, 19, 65528, -1610612736, 21, 65528, -1073741824, 65531, 65528, 536870912, 65533, 65528, -536870912, 0, 65529, 1073741824, 1, 65529, -1610612736, 2, 65529, -536870912, 3, 65529, 536870912, 8, 65529, 1073741824, 10, 65529, -1073741824, 14, 65529, 1073741824, 16, 65529, 1073741824, 19, 65529, -1073741824, 21, 65529, 0, 65525, 65529, 1610612736, 65526, 65529, -536870912, 65527, 65529, 1610612736, 65528, 65529, -536870912, 65529, 65529, 1610612736, 65530, 65529, -2147483648, 65531, 65529, 536870912, 65533, 65529, -1610612736, 65534, 65529, 0, 65535, 65529, -536870912, 3, 65530, 1073741824, 8, 65530, 0, 10, 65530, 1073741824, 14, 65530, 0, 16, 65530, 1610612736, 17, 65530, -1073741824, 18, 65530, 0, 19, 65530, 536870912, 21, 65530, -1610612736, 65525, 65530, -1610612736, 0, 65531, -536870912, 1, 65531, 1610612736, 3, 65531, 0, 8, 65531, 1610612736, 10, 65531, 0, 14, 65531, 0, 21, 65531, 536870912, 65525, 65531, -2147483648, 65527, 65531, 1073741824, 65528, 65531, 536870912, 65529, 65531, 1610612736, 65530, 65531, -536870912, 65531, 65531, 0, 65532, 65531, -2147483648, 65533, 65531, -1073741824, 65534, 65531, -536870912, 65535, 65531, 536870912, 1, 65532, 1610612736, 3, 65532, -536870912, 8, 65532, 0, 10, 65532, 0, 14, 65532, -1610612736, 16, 65532, 1073741824, 17, 65532, 536870912, 18, 65532, -2147483648, 19, 65532, -536870912, 20, 65532, -1073741824, 21, 65532, 1610612736, 65525, 65532, 536870912, 65527, 65532, 1610612736, 1, 65533, 536870912, 3, 65533, -1073741824, 8, 65533, -2147483648, 10, 65533, 1073741824, 11, 65533, 1073741824, 12, 65533, 536870912, 13, 65533, -1610612736, 14, 65533, -1073741824, 16, 65533, 536870912, 65525, 65533, 1073741824, 65527, 65533, 1610612736, 65529, 65533, -1610612736, 65530, 65533, 0, 65531, 65533, -536870912, 65533, 65533, -536870912, 65534, 65533, -536870912, 65535, 65533, -2147483648, 1, 65534, 1610612736, 3, 65534, -536870912, 8, 65534, 1610612736, 16, 65534, -2147483648, 65525, 65534, 0, 65527, 65534, 0, 65529, 65534, 0, 65535, 65534, 0, 1, 65535, 0, 3, 65535, 0, 8, 65535, -536870912, 9, 65535, 0, 10, 65535, 1610612736, 11, 65535, -2147483648, 13, 65535, -1073741824, 14, 65535, -1073741824, 16, 65535, -536870912, 65525, 65535, 0, 65527, 65535, 0, 65529, 65535, 0, 65531, 65535, 0, 65532, 65535, 0, 65533, 65535, 0, 65535, 65535, 0 )
+}
+script = ExtResource( 2 )
+__meta__ = {
+"_editor_clip_": 0,
+"_editor_floor_": Vector3( 0, 0, 0 )
+}
+
+[node name="Player" parent="." index="1" instance=ExtResource( 3 )]
+
+editor/display_folded = true
+transform = Transform( -4.37114e-008, 0, 1, 0, 1, 0, -1, 0, -4.37114e-008, 34.1259, 1, -42.9451 )
+
+[node name="Buttons" type="Spatial" parent="." index="2"]
+
+script = ExtResource( 4 )
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="Buttons" index="0"]
+
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 39, 1, -43 )
+stream = ExtResource( 5 )
+attenuation_model = 0
+unit_db = 0.0
+unit_size = 1.0
+max_db = 3.0
+pitch_scale = 1.0
+autoplay = false
+max_distance = 0.0
+out_of_range_mode = 0
+bus = "Master"
+area_mask = 1
+emission_angle_enabled = false
+emission_angle_degrees = 45.0
+emission_angle_filter_attenuation_db = -12.0
+attenuation_filter_cutoff_hz = 5000.0
+attenuation_filter_db = -24.0
+doppler_tracking = 0
+
+[node name="Button" parent="Buttons" index="1" instance=ExtResource( 6 )]
+
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 1, 4.0022 )
+
+[node name="Button2" parent="Buttons" index="2" instance=ExtResource( 6 )]
+
+transform = Transform( -4.37114e-008, 0, -1, 0, 1, 0, 1, 0, -4.37114e-008, -14.006, 1, -52.9978 )
+
+[node name="Button4" parent="Buttons" index="3" instance=ExtResource( 6 )]
+
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 27.994, 1, 4.0022 )
+
+[node name="Door" parent="Buttons" index="4" instance=ExtResource( 7 )]
+
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 37, 1, -43 )
+
+[node name="MeshInstance2" type="MeshInstance" parent="Buttons/Door" index="2"]
+
+transform = Transform( -4.37114e-008, 0, -1, 0, 1, 0, 0.0659388, 0, -2.88228e-009, -1.01563, 0, 0 )
+layers = 1
+material_override = null
+cast_shadow = 1
+extra_cull_margin = 0.0
+use_in_baked_light = false
+lod_min_distance = 0.0
+lod_min_hysteresis = 0.0
+lod_max_distance = 0.0
+lod_max_hysteresis = 0.0
+mesh = SubResource( 2 )
+skeleton = NodePath("..")
+material/0 = SubResource( 3 )
+_sections_unfolded = [ "material" ]
+
+[node name="Enemy" parent="." index="3" instance=ExtResource( 9 )]
+
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 1, -3 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="EndZone" type="Area" parent="." index="4"]
+
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 39, 1, -43 )
+input_ray_pickable = false
+input_capture_on_drag = false
+space_override = 0
+gravity_point = false
+gravity_distance_scale = 0.0
+gravity_vec = Vector3( 0, -1, 0 )
+gravity = 0.0
+linear_damp = 0.1
+angular_damp = 1.0
+priority = 0.0
+monitoring = true
+monitorable = true
+collision_layer = 0
+collision_mask = 1
+audio_bus_override = false
+audio_bus_name = "Master"
+reverb_bus_enable = false
+reverb_bus_name = "Master"
+reverb_bus_amount = 0.0
+reverb_bus_uniformity = 0.0
+script = ExtResource( 10 )
+_sections_unfolded = [ "Collision" ]
+
+[node name="CollisionShape" type="CollisionShape" parent="EndZone" index="0"]
+
+shape = SubResource( 1 )
+disabled = false
+
+[node name="MeshInstance5" type="MeshInstance" parent="EndZone" index="1"]
+
+transform = Transform( -0.0659388, 0, 4.65937e-008, 0, 1, 0, -4.65937e-008, 0, -1, -0.304626, 0, 0.989563 )
+layers = 1
+material_override = null
+cast_shadow = 1
+extra_cull_margin = 0.0
+use_in_baked_light = false
+lod_min_distance = 0.0
+lod_min_hysteresis = 0.0
+lod_max_distance = 0.0
+lod_max_hysteresis = 0.0
+mesh = SubResource( 2 )
+skeleton = NodePath("..")
+material/0 = SubResource( 3 )
+_sections_unfolded = [ "material" ]
+
+[node name="MeshInstance9" type="MeshInstance" parent="EndZone" index="2"]
+
+transform = Transform( -0.0659388, 0, 4.65937e-008, 0, 1, 0, -4.65937e-008, 0, -1, 1.69537, 0, 0.989563 )
+layers = 1
+material_override = null
+cast_shadow = 1
+extra_cull_margin = 0.0
+use_in_baked_light = false
+lod_min_distance = 0.0
+lod_min_hysteresis = 0.0
+lod_max_distance = 0.0
+lod_max_hysteresis = 0.0
+mesh = SubResource( 2 )
+skeleton = NodePath("..")
+material/0 = SubResource( 3 )
+_sections_unfolded = [ "material" ]
+
+[node name="MeshInstance11" type="MeshInstance" parent="EndZone" index="3"]
+
+transform = Transform( -0.0659388, 0, 4.65937e-008, 0, 1, 0, -4.65937e-008, 0, -1, 3.69537, 0, 0.989563 )
+layers = 1
+material_override = null
+cast_shadow = 1
+extra_cull_margin = 0.0
+use_in_baked_light = false
+lod_min_distance = 0.0
+lod_min_hysteresis = 0.0
+lod_max_distance = 0.0
+lod_max_hysteresis = 0.0
+mesh = SubResource( 2 )
+skeleton = NodePath("..")
+material/0 = SubResource( 3 )
+_sections_unfolded = [ "material" ]
+
+[node name="MeshInstance14" type="MeshInstance" parent="EndZone" index="4"]
+
+transform = Transform( -0.0659388, 0, 4.65937e-008, 0, 1, 0, -4.65937e-008, 0, -1, 5.69537, 0, 0.989563 )
+layers = 1
+material_override = null
+cast_shadow = 1
+extra_cull_margin = 0.0
+use_in_baked_light = false
+lod_min_distance = 0.0
+lod_min_hysteresis = 0.0
+lod_max_distance = 0.0
+lod_max_hysteresis = 0.0
+mesh = SubResource( 2 )
+skeleton = NodePath("..")
+material/0 = SubResource( 3 )
+_sections_unfolded = [ "material" ]
+
+[node name="MeshInstance16" type="MeshInstance" parent="EndZone" index="5"]
+
+transform = Transform( -0.0659388, 0, 4.65937e-008, 0, 1, 0, -4.65937e-008, 0, -1, 7.69537, 0, 0.989563 )
+layers = 1
+material_override = null
+cast_shadow = 1
+extra_cull_margin = 0.0
+use_in_baked_light = false
+lod_min_distance = 0.0
+lod_min_hysteresis = 0.0
+lod_max_distance = 0.0
+lod_max_hysteresis = 0.0
+mesh = SubResource( 2 )
+skeleton = NodePath("..")
+material/0 = SubResource( 3 )
+_sections_unfolded = [ "material" ]
+
+[node name="MeshInstance17" type="MeshInstance" parent="EndZone" index="6"]
+
+transform = Transform( -0.0659388, 0, 4.65937e-008, 0, 1, 0, -4.65937e-008, 0, -1, 9.69537, 0, 0.989563 )
+layers = 1
+material_override = null
+cast_shadow = 1
+extra_cull_margin = 0.0
+use_in_baked_light = false
+lod_min_distance = 0.0
+lod_min_hysteresis = 0.0
+lod_max_distance = 0.0
+lod_max_hysteresis = 0.0
+mesh = SubResource( 2 )
+skeleton = NodePath("..")
+material/0 = SubResource( 3 )
+_sections_unfolded = [ "material" ]
+
+[node name="MeshInstance20" type="MeshInstance" parent="EndZone" index="7"]
+
+transform = Transform( -0.0659388, 0, 4.65937e-008, 0, 1, 0, -4.65937e-008, 0, -1, 11.6954, 0, 0.989563 )
+layers = 1
+material_override = null
+cast_shadow = 1
+extra_cull_margin = 0.0
+use_in_baked_light = false
+lod_min_distance = 0.0
+lod_min_hysteresis = 0.0
+lod_max_distance = 0.0
+lod_max_hysteresis = 0.0
+mesh = SubResource( 2 )
+skeleton = NodePath("..")
+material/0 = SubResource( 3 )
+_sections_unfolded = [ "material" ]
+
+[node name="MeshInstance6" type="MeshInstance" parent="EndZone" index="8"]
+
+transform = Transform( -0.0659388, 0, 4.65937e-008, 0, 1, 0, -4.65937e-008, 0, -1, 0.476013, 0, 0.989563 )
+layers = 1
+material_override = null
+cast_shadow = 1
+extra_cull_margin = 0.0
+use_in_baked_light = false
+lod_min_distance = 0.0
+lod_min_hysteresis = 0.0
+lod_max_distance = 0.0
+lod_max_hysteresis = 0.0
+mesh = SubResource( 2 )
+skeleton = NodePath("..")
+material/0 = SubResource( 3 )
+_sections_unfolded = [ "material" ]
+
+[node name="MeshInstance10" type="MeshInstance" parent="EndZone" index="9"]
+
+transform = Transform( -0.0659388, 0, 4.65937e-008, 0, 1, 0, -4.65937e-008, 0, -1, 2.47601, 0, 0.989563 )
+layers = 1
+material_override = null
+cast_shadow = 1
+extra_cull_margin = 0.0
+use_in_baked_light = false
+lod_min_distance = 0.0
+lod_min_hysteresis = 0.0
+lod_max_distance = 0.0
+lod_max_hysteresis = 0.0
+mesh = SubResource( 2 )
+skeleton = NodePath("..")
+material/0 = SubResource( 3 )
+_sections_unfolded = [ "material" ]
+
+[node name="MeshInstance12" type="MeshInstance" parent="EndZone" index="10"]
+
+transform = Transform( -0.0659388, 0, 4.65937e-008, 0, 1, 0, -4.65937e-008, 0, -1, 4.47601, 0, 0.989563 )
+layers = 1
+material_override = null
+cast_shadow = 1
+extra_cull_margin = 0.0
+use_in_baked_light = false
+lod_min_distance = 0.0
+lod_min_hysteresis = 0.0
+lod_max_distance = 0.0
+lod_max_hysteresis = 0.0
+mesh = SubResource( 2 )
+skeleton = NodePath("..")
+material/0 = SubResource( 3 )
+_sections_unfolded = [ "material" ]
+
+[node name="MeshInstance13" type="MeshInstance" parent="EndZone" index="11"]
+
+transform = Transform( -0.0659388, 0, 4.65937e-008, 0, 1, 0, -4.65937e-008, 0, -1, 6.47601, 0, 0.989563 )
+layers = 1
+material_override = null
+cast_shadow = 1
+extra_cull_margin = 0.0
+use_in_baked_light = false
+lod_min_distance = 0.0
+lod_min_hysteresis = 0.0
+lod_max_distance = 0.0
+lod_max_hysteresis = 0.0
+mesh = SubResource( 2 )
+skeleton = NodePath("..")
+material/0 = SubResource( 3 )
+_sections_unfolded = [ "material" ]
+
+[node name="MeshInstance15" type="MeshInstance" parent="EndZone" index="12"]
+
+transform = Transform( -0.0659388, 0, 4.65937e-008, 0, 1, 0, -4.65937e-008, 0, -1, 8.47601, 0, 0.989563 )
+layers = 1
+material_override = null
+cast_shadow = 1
+extra_cull_margin = 0.0
+use_in_baked_light = false
+lod_min_distance = 0.0
+lod_min_hysteresis = 0.0
+lod_max_distance = 0.0
+lod_max_hysteresis = 0.0
+mesh = SubResource( 2 )
+skeleton = NodePath("..")
+material/0 = SubResource( 3 )
+_sections_unfolded = [ "material" ]
+
+[node name="MeshInstance18" type="MeshInstance" parent="EndZone" index="13"]
+
+transform = Transform( -0.0659388, 0, 4.65937e-008, 0, 1, 0, -4.65937e-008, 0, -1, 10.476, 0, 0.989563 )
+layers = 1
+material_override = null
+cast_shadow = 1
+extra_cull_margin = 0.0
+use_in_baked_light = false
+lod_min_distance = 0.0
+lod_min_hysteresis = 0.0
+lod_max_distance = 0.0
+lod_max_hysteresis = 0.0
+mesh = SubResource( 2 )
+skeleton = NodePath("..")
+material/0 = SubResource( 3 )
+_sections_unfolded = [ "material" ]
+
+[node name="MeshInstance19" type="MeshInstance" parent="EndZone" index="14"]
+
+transform = Transform( -0.0659388, 0, 4.65937e-008, 0, 1, 0, -4.65937e-008, 0, -1, 12.476, 0, 0.989563 )
+layers = 1
+material_override = null
+cast_shadow = 1
+extra_cull_margin = 0.0
+use_in_baked_light = false
+lod_min_distance = 0.0
+lod_min_hysteresis = 0.0
+lod_max_distance = 0.0
+lod_max_hysteresis = 0.0
+mesh = SubResource( 2 )
+skeleton = NodePath("..")
+material/0 = SubResource( 3 )
+_sections_unfolded = [ "material" ]
+
+[node name="MeshInstance7" type="MeshInstance" parent="EndZone" index="15"]
+
+transform = Transform( 0.0659388, 0, 4.08291e-008, 0, 1, 0, 4.08291e-008, 0, 1, 0.476017, 0, -0.999142 )
+layers = 1
+material_override = null
+cast_shadow = 1
+extra_cull_margin = 0.0
+use_in_baked_light = false
+lod_min_distance = 0.0
+lod_min_hysteresis = 0.0
+lod_max_distance = 0.0
+lod_max_hysteresis = 0.0
+mesh = SubResource( 2 )
+skeleton = NodePath("..")
+material/0 = SubResource( 3 )
+_sections_unfolded = [ "material" ]
+
+[node name="MeshInstance21" type="MeshInstance" parent="EndZone" index="16"]
+
+transform = Transform( 0.0659388, 0, 4.08291e-008, 0, 1, 0, 4.08291e-008, 0, 1, 2.47602, 0, -0.999142 )
+layers = 1
+material_override = null
+cast_shadow = 1
+extra_cull_margin = 0.0
+use_in_baked_light = false
+lod_min_distance = 0.0
+lod_min_hysteresis = 0.0
+lod_max_distance = 0.0
+lod_max_hysteresis = 0.0
+mesh = SubResource( 2 )
+skeleton = NodePath("..")
+material/0 = SubResource( 3 )
+_sections_unfolded = [ "material" ]
+
+[node name="MeshInstance24" type="MeshInstance" parent="EndZone" index="17"]
+
+transform = Transform( 0.0659388, 0, 4.08291e-008, 0, 1, 0, 4.08291e-008, 0, 1, 4.47602, 0, -0.999142 )
+layers = 1
+material_override = null
+cast_shadow = 1
+extra_cull_margin = 0.0
+use_in_baked_light = false
+lod_min_distance = 0.0
+lod_min_hysteresis = 0.0
+lod_max_distance = 0.0
+lod_max_hysteresis = 0.0
+mesh = SubResource( 2 )
+skeleton = NodePath("..")
+material/0 = SubResource( 3 )
+_sections_unfolded = [ "material" ]
+
+[node name="MeshInstance26" type="MeshInstance" parent="EndZone" index="18"]
+
+transform = Transform( 0.0659388, 0, 4.08291e-008, 0, 1, 0, 4.08291e-008, 0, 1, 6.47602, 0, -0.999142 )
+layers = 1
+material_override = null
+cast_shadow = 1
+extra_cull_margin = 0.0
+use_in_baked_light = false
+lod_min_distance = 0.0
+lod_min_hysteresis = 0.0
+lod_max_distance = 0.0
+lod_max_hysteresis = 0.0
+mesh = SubResource( 2 )
+skeleton = NodePath("..")
+material/0 = SubResource( 3 )
+_sections_unfolded = [ "material" ]
+
+[node name="MeshInstance28" type="MeshInstance" parent="EndZone" index="19"]
+
+transform = Transform( 0.0659388, 0, 4.08291e-008, 0, 1, 0, 4.08291e-008, 0, 1, 8.47602, 0, -0.999142 )
+layers = 1
+material_override = null
+cast_shadow = 1
+extra_cull_margin = 0.0
+use_in_baked_light = false
+lod_min_distance = 0.0
+lod_min_hysteresis = 0.0
+lod_max_distance = 0.0
+lod_max_hysteresis = 0.0
+mesh = SubResource( 2 )
+skeleton = NodePath("..")
+material/0 = SubResource( 3 )
+_sections_unfolded = [ "material" ]
+
+[node name="MeshInstance30" type="MeshInstance" parent="EndZone" index="20"]
+
+transform = Transform( 0.0659388, 0, 4.08291e-008, 0, 1, 0, 4.08291e-008, 0, 1, 10.476, 0, -0.999142 )
+layers = 1
+material_override = null
+cast_shadow = 1
+extra_cull_margin = 0.0
+use_in_baked_light = false
+lod_min_distance = 0.0
+lod_min_hysteresis = 0.0
+lod_max_distance = 0.0
+lod_max_hysteresis = 0.0
+mesh = SubResource( 2 )
+skeleton = NodePath("..")
+material/0 = SubResource( 3 )
+_sections_unfolded = [ "material" ]
+
+[node name="MeshInstance31" type="MeshInstance" parent="EndZone" index="21"]
+
+transform = Transform( 0.0659388, 0, 4.08291e-008, 0, 1, 0, 4.08291e-008, 0, 1, 12.476, 0, -0.999142 )
+layers = 1
+material_override = null
+cast_shadow = 1
+extra_cull_margin = 0.0
+use_in_baked_light = false
+lod_min_distance = 0.0
+lod_min_hysteresis = 0.0
+lod_max_distance = 0.0
+lod_max_hysteresis = 0.0
+mesh = SubResource( 2 )
+skeleton = NodePath("..")
+material/0 = SubResource( 3 )
+_sections_unfolded = [ "material" ]
+
+[node name="MeshInstance8" type="MeshInstance" parent="EndZone" index="22"]
+
+transform = Transform( 0.0659388, 0, 4.08291e-008, 0, 1, 0, 4.08291e-008, 0, 1, -0.414547, 0, -0.999142 )
+layers = 1
+material_override = null
+cast_shadow = 1
+extra_cull_margin = 0.0
+use_in_baked_light = false
+lod_min_distance = 0.0
+lod_min_hysteresis = 0.0
+lod_max_distance = 0.0
+lod_max_hysteresis = 0.0
+mesh = SubResource( 2 )
+skeleton = NodePath("..")
+material/0 = SubResource( 3 )
+_sections_unfolded = [ "material" ]
+
+[node name="MeshInstance22" type="MeshInstance" parent="EndZone" index="23"]
+
+transform = Transform( 0.0659388, 0, 4.08291e-008, 0, 1, 0, 4.08291e-008, 0, 1, 1.58545, 0, -0.999142 )
+layers = 1
+material_override = null
+cast_shadow = 1
+extra_cull_margin = 0.0
+use_in_baked_light = false
+lod_min_distance = 0.0
+lod_min_hysteresis = 0.0
+lod_max_distance = 0.0
+lod_max_hysteresis = 0.0
+mesh = SubResource( 2 )
+skeleton = NodePath("..")
+material/0 = SubResource( 3 )
+_sections_unfolded = [ "material" ]
+
+[node name="MeshInstance23" type="MeshInstance" parent="EndZone" index="24"]
+
+transform = Transform( 0.0659388, 0, 4.08291e-008, 0, 1, 0, 4.08291e-008, 0, 1, 3.58545, 0, -0.999142 )
+layers = 1
+material_override = null
+cast_shadow = 1
+extra_cull_margin = 0.0
+use_in_baked_light = false
+lod_min_distance = 0.0
+lod_min_hysteresis = 0.0
+lod_max_distance = 0.0
+lod_max_hysteresis = 0.0
+mesh = SubResource( 2 )
+skeleton = NodePath("..")
+material/0 = SubResource( 3 )
+_sections_unfolded = [ "material" ]
+
+[node name="MeshInstance25" type="MeshInstance" parent="EndZone" index="25"]
+
+transform = Transform( 0.0659388, 0, 4.08291e-008, 0, 1, 0, 4.08291e-008, 0, 1, 5.58545, 0, -0.999142 )
+layers = 1
+material_override = null
+cast_shadow = 1
+extra_cull_margin = 0.0
+use_in_baked_light = false
+lod_min_distance = 0.0
+lod_min_hysteresis = 0.0
+lod_max_distance = 0.0
+lod_max_hysteresis = 0.0
+mesh = SubResource( 2 )
+skeleton = NodePath("..")
+material/0 = SubResource( 3 )
+_sections_unfolded = [ "material" ]
+
+[node name="MeshInstance27" type="MeshInstance" parent="EndZone" index="26"]
+
+transform = Transform( 0.0659388, 0, 4.08291e-008, 0, 1, 0, 4.08291e-008, 0, 1, 7.58545, 0, -0.999142 )
+layers = 1
+material_override = null
+cast_shadow = 1
+extra_cull_margin = 0.0
+use_in_baked_light = false
+lod_min_distance = 0.0
+lod_min_hysteresis = 0.0
+lod_max_distance = 0.0
+lod_max_hysteresis = 0.0
+mesh = SubResource( 2 )
+skeleton = NodePath("..")
+material/0 = SubResource( 3 )
+_sections_unfolded = [ "material" ]
+
+[node name="MeshInstance29" type="MeshInstance" parent="EndZone" index="27"]
+
+transform = Transform( 0.0659388, 0, 4.08291e-008, 0, 1, 0, 4.08291e-008, 0, 1, 9.58545, 0, -0.999142 )
+layers = 1
+material_override = null
+cast_shadow = 1
+extra_cull_margin = 0.0
+use_in_baked_light = false
+lod_min_distance = 0.0
+lod_min_hysteresis = 0.0
+lod_max_distance = 0.0
+lod_max_hysteresis = 0.0
+mesh = SubResource( 2 )
+skeleton = NodePath("..")
+material/0 = SubResource( 3 )
+_sections_unfolded = [ "material" ]
+
+[node name="MeshInstance32" type="MeshInstance" parent="EndZone" index="28"]
+
+transform = Transform( 0.0659388, 0, 4.08291e-008, 0, 1, 0, 4.08291e-008, 0, 1, 11.5855, 0, -0.999142 )
+layers = 1
+material_override = null
+cast_shadow = 1
+extra_cull_margin = 0.0
+use_in_baked_light = false
+lod_min_distance = 0.0
+lod_min_hysteresis = 0.0
+lod_max_distance = 0.0
+lod_max_hysteresis = 0.0
+mesh = SubResource( 2 )
+skeleton = NodePath("..")
+material/0 = SubResource( 3 )
+_sections_unfolded = [ "material" ]
+
+
+[editable path="Player"]

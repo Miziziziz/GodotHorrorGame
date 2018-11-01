@@ -1,0 +1,213 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://button.gd" type="Script" id=1]
+[ext_resource path="res://maze_block.shader" type="Shader" id=2]
+[ext_resource path="res://15813__tedthetrumpet__alarmclockbeeps.wav" type="AudioStream" id=3]
+
+[sub_resource type="BoxShape" id=1]
+
+extents = Vector3( 0.566305, 1, 0.103412 )
+
+[sub_resource type="QuadMesh" id=2]
+
+custom_aabb = AABB( 0, 0, 0, 0, 0, 0 )
+size = Vector2( 1, 1 )
+
+[sub_resource type="ShaderMaterial" id=3]
+
+render_priority = 0
+shader = ExtResource( 2 )
+shader_param/color = Color( 1, 1, 1, 1 )
+_sections_unfolded = [ "shader_param" ]
+
+[sub_resource type="ShaderMaterial" id=4]
+
+render_priority = 0
+shader = ExtResource( 2 )
+shader_param/color = null
+
+[sub_resource type="CylinderMesh" id=5]
+
+custom_aabb = AABB( 0, 0, 0, 0, 0, 0 )
+top_radius = 1.0
+bottom_radius = 1.0
+height = 2.0
+radial_segments = 64
+rings = 4
+
+[sub_resource type="ShaderMaterial" id=6]
+
+render_priority = 0
+shader = ExtResource( 2 )
+shader_param/color = Color( 1, 1, 1, 1 )
+_sections_unfolded = [ "shader_param" ]
+
+[sub_resource type="ShaderMaterial" id=7]
+
+render_priority = 0
+shader = ExtResource( 2 )
+shader_param/color = null
+_sections_unfolded = [ "shader_param" ]
+
+[node name="Button" type="StaticBody"]
+
+input_ray_pickable = true
+input_capture_on_drag = false
+collision_layer = 2
+collision_mask = 0
+friction = 1.0
+bounce = 0.0
+constant_linear_velocity = Vector3( 0, 0, 0 )
+constant_angular_velocity = Vector3( 0, 0, 0 )
+script = ExtResource( 1 )
+_sections_unfolded = [ "Collision" ]
+
+[node name="CollisionShape" type="CollisionShape" parent="." index="0"]
+
+shape = SubResource( 1 )
+disabled = false
+_sections_unfolded = [ "Transform" ]
+
+[node name="Visuals" type="Spatial" parent="." index="1"]
+
+transform = Transform( 0.175, 0, 0, 0, 0.175, 0, 0, 0, 0.175, 0, 0, 0 )
+
+[node name="BackPlating" type="MeshInstance" parent="Visuals" index="0"]
+
+layers = 1
+material_override = null
+cast_shadow = 1
+extra_cull_margin = 0.0
+use_in_baked_light = false
+lod_min_distance = 0.0
+lod_min_hysteresis = 0.0
+lod_max_distance = 0.0
+lod_max_hysteresis = 0.0
+mesh = SubResource( 2 )
+skeleton = NodePath("..")
+material/0 = SubResource( 3 )
+_sections_unfolded = [ "material" ]
+
+[node name="BackPlating2" type="MeshInstance" parent="Visuals" index="1"]
+
+transform = Transform( 0.0182466, 0, 0, 0, 0.20529, 0, 0, 0, 1, -0.413868, 0.352553, 0.001 )
+layers = 1
+material_override = null
+cast_shadow = 1
+extra_cull_margin = 0.0
+use_in_baked_light = false
+lod_min_distance = 0.0
+lod_min_hysteresis = 0.0
+lod_max_distance = 0.0
+lod_max_hysteresis = 0.0
+mesh = SubResource( 2 )
+skeleton = NodePath("..")
+material/0 = SubResource( 4 )
+_sections_unfolded = [ "Transform", "material" ]
+
+[node name="BackPlating3" type="MeshInstance" parent="Visuals" index="2"]
+
+transform = Transform( 0.0182466, 0, 0, 0, 0.20529, 0, 0, 0, 1, -0.378596, 0.352553, 0.001 )
+layers = 1
+material_override = null
+cast_shadow = 1
+extra_cull_margin = 0.0
+use_in_baked_light = false
+lod_min_distance = 0.0
+lod_min_hysteresis = 0.0
+lod_max_distance = 0.0
+lod_max_hysteresis = 0.0
+mesh = SubResource( 2 )
+skeleton = NodePath("..")
+material/0 = SubResource( 4 )
+_sections_unfolded = [ "Transform", "material" ]
+
+[node name="BackPlating4" type="MeshInstance" parent="Visuals" index="3"]
+
+transform = Transform( 0.0182466, 0, 0, 0, 0.20529, 0, 0, 0, 1, -0.339486, 0.352553, 0.001 )
+layers = 1
+material_override = null
+cast_shadow = 1
+extra_cull_margin = 0.0
+use_in_baked_light = false
+lod_min_distance = 0.0
+lod_min_hysteresis = 0.0
+lod_max_distance = 0.0
+lod_max_hysteresis = 0.0
+mesh = SubResource( 2 )
+skeleton = NodePath("..")
+material/0 = SubResource( 4 )
+_sections_unfolded = [ "Transform", "material" ]
+
+[node name="ButtonUp" type="MeshInstance" parent="Visuals" index="4"]
+
+transform = Transform( 0.193905, 0, 0, 0, -8.47585e-009, -0.193905, 0, 0.107748, -4.70979e-009, 0, 0, 0 )
+layers = 1
+material_override = null
+cast_shadow = 1
+extra_cull_margin = 0.0
+use_in_baked_light = false
+lod_min_distance = 0.0
+lod_min_hysteresis = 0.0
+lod_max_distance = 0.0
+lod_max_hysteresis = 0.0
+mesh = SubResource( 5 )
+skeleton = NodePath("..")
+material/0 = SubResource( 6 )
+_sections_unfolded = [ "material" ]
+
+[node name="ButtonDown" type="MeshInstance" parent="Visuals" index="5"]
+
+transform = Transform( 0.193905, 0, 0, 0, -8.47585e-009, -0.193905, 0, 0.107748, -4.70979e-009, 0, 0, -0.0890873 )
+layers = 1
+material_override = null
+cast_shadow = 1
+extra_cull_margin = 0.0
+use_in_baked_light = false
+lod_min_distance = 0.0
+lod_min_hysteresis = 0.0
+lod_max_distance = 0.0
+lod_max_hysteresis = 0.0
+mesh = SubResource( 5 )
+skeleton = NodePath("..")
+material/0 = SubResource( 6 )
+_sections_unfolded = [ "material" ]
+
+[node name="ButtonSurround" type="MeshInstance" parent="Visuals" index="6"]
+
+transform = Transform( 0.283936, 0, 0, 0, -1.24112e-008, -0.283936, 0, 0.0252511, -1.10376e-009, 0, 0, -0.0128439 )
+layers = 1
+material_override = null
+cast_shadow = 1
+extra_cull_margin = 0.0
+use_in_baked_light = false
+lod_min_distance = 0.0
+lod_min_hysteresis = 0.0
+lod_max_distance = 0.0
+lod_max_hysteresis = 0.0
+mesh = SubResource( 5 )
+skeleton = NodePath("..")
+material/0 = SubResource( 7 )
+_sections_unfolded = [ "material" ]
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="." index="2"]
+
+stream = ExtResource( 3 )
+attenuation_model = 1
+unit_db = 0.0
+unit_size = 2.0
+max_db = 1.0
+pitch_scale = 1.0
+autoplay = true
+max_distance = 0.0
+out_of_range_mode = 0
+bus = "Master"
+area_mask = 1
+emission_angle_enabled = false
+emission_angle_degrees = 45.0
+emission_angle_filter_attenuation_db = -12.0
+attenuation_filter_cutoff_hz = 5000.0
+attenuation_filter_db = -24.0
+doppler_tracking = 0
+
+

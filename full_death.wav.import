@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/full_death.wav-c9ee34072c631df81db6548da312dced.sample"
+
+[deps]
+
+source_file="res://full_death.wav"
+dest_files=[ "res://.import/full_death.wav-c9ee34072c631df81db6548da312dced.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=true
+edit/loop=false
+compress/mode=0

@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://maze_block.tscn" type="PackedScene" id=1]
+
+[node name="MazeBlocks" type="Spatial"]
+
+[node name="MazeBlock" parent="." index="0" instance=ExtResource( 1 )]
+
+
